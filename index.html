@@ -3,743 +3,293 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Oleraa — Cashback belanja online</title>
-<meta name="description" content="Belanja seperti biasa di Shopee dan TikTok Shop lewat tautan Oleraa, cashback-nya otomatis masuk ke saldo dan bisa dicairkan kapan saja.">
+<title>Oleraa — Belanja di Shopee &amp; TikTok Shop, Dapat Cashback</title>
+<meta name="description" content="Klik link Oleraa sebelum checkout di Shopee atau TikTok Shop, belanja seperti biasa, cashback otomatis masuk ke saldo kamu.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 34 34'%3E%3Crect width='34' height='34' rx='10' fill='%23F97316'/%3E%3Ctext x='17' y='24' font-family='Georgia,serif' font-weight='800' font-size='18' fill='white' text-anchor='middle'%3EO%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
 <style>
-  :root {
-    --primary: #2680C2;
-    --primary-deep: #1B5E86;
-    --primary-light: #CFE7F7;
-    --accent: #F2901E;
-    --accent-deep: #C96A0A;
-    --accent-soft: #F7C68B;
-    --neutral: #F8FBFE;
-    --neutral-raised: #EEF5FA;
-    --ink: #16232E;
-    --ink-soft: #51667A;
-    --line: #DCE6EF;
-    --shadow: 210 60% 12%;
+  :root{
+    --ivory:#F7F6F2; --surface:#FFFFFF; --deep-navy:#101820;
+    --ink:#0B1F33; --ink-dim:#536273;
+    --orange:#F97316; --orange-pressed:#E8640D;
+    --gold:#C9A227; --gold-soft:#F3ECD8;
+    --teal:#119C8A; --teal-soft:#E3F3F0;
+    --pink:#DE5D83; --blue:#378DB8;
+    --line:#EAE2D2; --muted:#9BAAB5;
+    --radius-lg:22px; --radius-md:14px; --radius-pill:999px;
+    --shadow:0 12px 30px -12px rgba(11,31,51,.18);
   }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;font-family:'Plus Jakarta Sans',-apple-system,sans-serif;color:var(--ink);background:var(--ivory);-webkit-font-smoothing:antialiased;}
+  img,svg{display:block;max-width:100%;}
+  a{color:inherit;}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px;}
+  h1,h2,h3{margin:0;text-wrap:balance;font-weight:800;}
+  p{margin:0;}
 
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-      --neutral: #0F171F;
-      --neutral-raised: #172230;
-      --ink: #E8F1FA;
-      --ink-soft: #9FB3C4;
-      --line: #253244;
-      --primary: #63B0E6;
-      --primary-deep: #8FCBF2;
-      --primary-light: #1E3A50;
-      --accent: #F5A94A;
-      --accent-deep: #F2901E;
-      --accent-soft: #7A430D;
-    }
-  }
+  /* ---------- header ---------- */
+  header{position:sticky;top:0;z-index:20;background:rgba(247,246,242,.88);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);}
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:16px 0;}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.15rem;color:var(--ink);text-decoration:none;}
+  .brand-mark{width:34px;height:34px;border-radius:10px;background:var(--orange);color:#fff;display:flex;align-items:center;justify-content:center;font-family:Georgia,serif;font-weight:800;font-size:1rem;flex-shrink:0;}
+  .nav-links{display:flex;gap:28px;list-style:none;margin:0;padding:0;}
+  .nav-links a{font-weight:600;font-size:.92rem;color:var(--ink-dim);text-decoration:none;}
+  .nav-links a:hover{color:var(--orange);}
+  .nav-cta{display:none;}
+  @media(min-width:720px){.nav-cta{display:inline-flex;}}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:none;cursor:pointer;font-family:inherit;font-weight:700;font-size:.92rem;text-decoration:none;border-radius:var(--radius-pill);padding:13px 24px;transition:transform .15s ease,background .15s ease;}
+  .btn:active{transform:scale(.97);}
+  .btn-primary{background:var(--orange);color:#fff;}
+  .btn-primary:hover{background:var(--orange-pressed);}
+  .btn-ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line);}
+  .btn-ghost:hover{border-color:var(--orange);color:var(--orange);}
+  .btn-soon{background:var(--gold-soft);color:#7A6116;cursor:default;}
 
-  :root[data-theme="dark"] {
-    --neutral: #0F171F;
-    --neutral-raised: #172230;
-    --ink: #E8F1FA;
-    --ink-soft: #9FB3C4;
-    --line: #253244;
-    --primary: #63B0E6;
-    --primary-deep: #8FCBF2;
-    --primary-light: #1E3A50;
-    --accent: #F5A94A;
-    --accent-deep: #F2901E;
-    --accent-soft: #7A430D;
-  }
+  /* ---------- hero ---------- */
+  .hero{padding:64px 0 56px;}
+  .hero-grid{display:grid;gap:40px;align-items:center;}
+  @media(min-width:860px){.hero-grid{grid-template-columns:1.05fr .95fr;gap:56px;}}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;background:var(--gold-soft);color:#7A6116;font-weight:700;font-size:.78rem;letter-spacing:.03em;padding:7px 14px;border-radius:var(--radius-pill);text-transform:uppercase;}
+  .hero h1{font-size:clamp(1.9rem,4.4vw,3rem);line-height:1.12;margin-top:18px;}
+  .hero h1 span{color:var(--orange);}
+  .hero p.lead{margin-top:18px;font-size:1.08rem;line-height:1.6;color:var(--ink-dim);max-width:46ch;}
+  .hero-actions{margin-top:28px;display:flex;flex-wrap:wrap;gap:14px;}
+  .hero-note{margin-top:14px;font-size:.83rem;color:var(--muted);}
 
-  * { box-sizing: border-box; }
-  html { -webkit-text-size-adjust: 100%; }
+  .hero-card{position:relative;background:var(--surface);border-radius:var(--radius-lg);box-shadow:var(--shadow);padding:28px;border:1px solid var(--line);}
+  .hero-card-head{display:flex;align-items:center;justify-content:space-between;}
+  .hero-card-label{font-size:.8rem;color:var(--ink-dim);font-weight:600;}
+  .hero-card-pill{background:var(--teal-soft);color:var(--teal);font-size:.72rem;font-weight:700;padding:4px 10px;border-radius:var(--radius-pill);}
+  .hero-balance{margin-top:14px;font-size:2.1rem;font-weight:800;color:var(--ink);}
+  .hero-balance small{display:block;font-size:.85rem;font-weight:600;color:var(--ink-dim);margin-bottom:2px;}
+  .hero-steps{margin-top:24px;display:flex;flex-direction:column;gap:14px;}
+  .hero-step{display:flex;align-items:center;gap:12px;font-size:.88rem;color:var(--ink-dim);}
+  .hero-step .dot{width:26px;height:26px;border-radius:50%;background:var(--gold-soft);color:var(--gold);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.78rem;flex-shrink:0;}
+  .hero-step.done .dot{background:var(--teal-soft);color:var(--teal);}
+  .hero-step.done{color:var(--ink);font-weight:600;}
 
-  body {
-    margin: 0;
-    background: var(--neutral);
-    color: var(--ink);
-    font-family: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, sans-serif;
-    font-size: 16px;
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-  }
+  /* ---------- shared section ---------- */
+  section{padding:60px 0;}
+  .section-head{max-width:640px;margin:0 auto 40px;text-align:center;}
+  .section-head .eyebrow{margin-bottom:14px;}
+  .section-head h2{font-size:clamp(1.5rem,3vw,2.1rem);}
+  .section-head p{margin-top:12px;color:var(--ink-dim);font-size:1.02rem;line-height:1.6;}
 
-  h1, h2, h3 {
-    font-family: "Baloo 2", ui-rounded, "Plus Jakarta Sans", sans-serif;
-    font-weight: 700;
-    line-height: 1.15;
-    text-wrap: balance;
-    margin: 0;
-    color: var(--ink);
-  }
+  /* ---------- cara kerja ---------- */
+  .steps-grid{display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));}
+  .step-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:26px 22px;}
+  .step-num{width:36px;height:36px;border-radius:11px;background:var(--gold-soft);color:var(--gold);display:flex;align-items:center;justify-content:center;font-weight:800;}
+  .step-card h3{margin-top:16px;font-size:1.02rem;}
+  .step-card p{margin-top:8px;font-size:.9rem;color:var(--ink-dim);line-height:1.55;}
+  .step-flow{margin-top:36px;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px;font-size:.82rem;font-weight:700;color:var(--ink-dim);}
+  .flow-pill{padding:7px 14px;border-radius:var(--radius-pill);background:var(--surface);border:1px solid var(--line);}
+  .flow-pill.on{background:var(--teal-soft);color:var(--teal);border-color:transparent;}
 
-  a { color: inherit; }
-  :focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+  /* ---------- tingkatan ---------- */
+  .tier-band{background:var(--deep-navy);color:#fff;}
+  .tier-band .section-head p{color:#9FB4C4;}
+  .tier-band .eyebrow{background:rgba(201,162,39,.18);color:var(--gold);}
+  .tier-grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));}
+  .tier-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:var(--radius-lg);padding:22px;}
+  .tier-badge{display:inline-block;font-size:.72rem;font-weight:800;letter-spacing:.04em;text-transform:uppercase;padding:5px 12px;border-radius:var(--radius-pill);margin-bottom:14px;}
+  .tier-card p{font-size:.86rem;color:#B9C6D1;line-height:1.55;}
+  .tier-reguler .tier-badge{background:rgba(55,141,184,.22);color:#7FC2E8;}
+  .tier-silver .tier-badge{background:rgba(155,170,181,.22);color:#D3DCE2;}
+  .tier-gold .tier-badge{background:rgba(201,162,39,.22);color:#E7C769;}
+  .tier-platinum .tier-badge{background:rgba(222,93,131,.22);color:#F3A9C0;}
+  .tier-note{margin-top:28px;text-align:center;font-size:.85rem;color:#8EA1AF;}
 
-  .wrap {
-    max-width: 1080px;
-    margin: 0 auto;
-    padding: 0 24px;
-  }
+  /* ---------- ajak teman ---------- */
+  .referral-card{background:linear-gradient(135deg,var(--gold-soft),var(--surface));border:1px solid var(--line);border-radius:var(--radius-lg);padding:36px;display:grid;gap:28px;align-items:center;}
+  @media(min-width:760px){.referral-card{grid-template-columns:1fr auto;}}
+  .referral-card h2{font-size:1.5rem;}
+  .referral-card p{margin-top:10px;color:var(--ink-dim);line-height:1.6;max-width:52ch;}
+  .referral-amount{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:22px 30px;text-align:center;box-shadow:var(--shadow);}
+  .referral-amount .num{font-size:1.9rem;font-weight:800;color:var(--gold);}
+  .referral-amount .label{font-size:.8rem;color:var(--ink-dim);font-weight:600;margin-top:4px;}
 
-  .mono {
-    font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
-    font-variant-numeric: tabular-nums;
-  }
-
-  /* ---------- Logo mark ---------- */
-  .logo-mark {
-    width: 28px;
-    height: 28px;
-    flex-shrink: 0;
-    display: block;
-  }
-
-  /* ---------- Header ---------- */
-  header.site {
-    position: sticky;
-    top: 0;
-    z-index: 20;
-    background: color-mix(in srgb, var(--neutral) 88%, transparent);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--line);
-  }
-  .nav-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 16px 0;
-  }
-  .wordmark {
-    font-family: "Baloo 2", sans-serif;
-    font-weight: 700;
-    font-size: 1.3rem;
-    letter-spacing: -0.01em;
-    text-decoration: none;
-    color: var(--primary-deep);
-    display: flex;
-    align-items: center;
-    gap: 9px;
-  }
-  .nav-links {
-    display: flex;
-    gap: 28px;
-    font-size: 0.9rem;
-    font-weight: 600;
-  }
-  .nav-links a {
-    text-decoration: none;
-    color: var(--ink-soft);
-    transition: color .15s ease;
-  }
-  .nav-links a:hover, .nav-links a:focus-visible { color: var(--primary-deep); }
-  @media (max-width: 640px) { .nav-links { display: none; } }
-
-  /* ---------- Hero ---------- */
-  .hero {
-    padding: 76px 0 64px;
-    display: grid;
-    grid-template-columns: 1.1fr 0.9fr;
-    gap: 56px;
-    align-items: center;
-  }
-  @media (max-width: 860px) {
-    .hero { grid-template-columns: 1fr; padding: 48px 0 40px; }
-  }
-  .eyebrow {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 0.8rem;
-    font-weight: 700;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--primary-deep);
-    background: var(--primary-light);
-    border: 1px solid color-mix(in srgb, var(--primary) 30%, transparent);
-    padding: 6px 14px;
-    border-radius: 999px;
-    margin-bottom: 22px;
-  }
-  .hero h1 {
-    font-size: clamp(2.4rem, 4.6vw, 3.6rem);
-    letter-spacing: -0.01em;
-  }
-  .hero h1 em {
-    font-style: normal;
-    color: var(--accent-deep);
-  }
-  .hero p.lede {
-    margin: 22px 0 0;
-    max-width: 46ch;
-    color: var(--ink-soft);
-    font-size: 1.08rem;
-  }
-  .cta-row {
-    margin-top: 32px;
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    flex-wrap: wrap;
-  }
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: var(--primary);
-    color: #fff;
-    font-weight: 700;
-    font-size: 0.98rem;
-    padding: 14px 26px;
-    border-radius: 14px;
-    text-decoration: none;
-    border: 1px solid var(--primary);
-    transition: background .15s ease, transform .15s ease;
-  }
-  .btn:hover, .btn:focus-visible { background: var(--primary-deep); border-color: var(--primary-deep); transform: translateY(-1px); }
-  .fine-note {
-    font-size: 0.85rem;
-    color: var(--ink-soft);
-    font-weight: 600;
-  }
-
-  /* ---------- App preview card ---------- */
-  .app-card {
-    background: var(--neutral-raised);
-    border: 1px solid var(--line);
-    border-radius: 20px;
-    padding: 26px;
-    box-shadow: 0 20px 44px -28px hsl(var(--shadow) / 0.5);
-    max-width: 360px;
-    margin-inline: auto;
-    transition: transform .25s ease;
-  }
-  .app-card:hover { transform: translateY(-4px); }
-  .app-card .brand-row {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-weight: 700;
-    font-size: 0.9rem;
-    color: var(--ink-soft);
-    margin-bottom: 18px;
-  }
-  .balance-block {
-    background: linear-gradient(155deg, var(--primary) 0%, var(--primary-deep) 100%);
-    border-radius: 14px;
-    padding: 20px 22px;
-    color: #fff;
-  }
-  .balance-label {
-    font-size: 0.78rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    opacity: 0.85;
-  }
-  .balance-amount {
-    font-size: 2.1rem;
-    font-weight: 600;
-    margin-top: 6px;
-    letter-spacing: -0.01em;
-  }
-  .balance-sub {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 14px;
-    padding-top: 14px;
-    border-top: 1px solid rgba(255,255,255,0.22);
-    font-size: 0.82rem;
-    opacity: 0.92;
-  }
-  .tx-list {
-    margin-top: 18px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-  .tx-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 0.88rem;
-    padding-bottom: 12px;
-    border-bottom: 1px solid var(--line);
-  }
-  .tx-row:last-child { border-bottom: none; padding-bottom: 0; }
-  .tx-name { font-weight: 600; }
-  .tx-meta { color: var(--ink-soft); font-size: 0.78rem; margin-top: 2px; }
-  .tx-amount { color: var(--primary-deep); font-weight: 700; }
-  .status-pill {
-    font-size: 0.68rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    padding: 2px 8px;
-    border-radius: 999px;
-    background: color-mix(in srgb, var(--ink-soft) 16%, transparent);
-    color: var(--ink-soft);
-  }
-  .status-pill.paid {
-    background: color-mix(in srgb, var(--accent) 20%, transparent);
-    color: var(--accent-deep);
-  }
-
-  /* ---------- Section shell ---------- */
-  section { padding: 76px 0; }
-  .section-head {
-    max-width: 620px;
-    margin-bottom: 44px;
-  }
-  .section-head .kicker {
-    font-size: 0.8rem;
-    font-weight: 700;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--accent-deep);
-    margin-bottom: 10px;
-    display: block;
-  }
-  .section-head h2 {
-    font-size: clamp(1.7rem, 3vw, 2.3rem);
-  }
-  .section-head p {
-    margin: 14px 0 0;
-    color: var(--ink-soft);
-    max-width: 52ch;
-  }
-  .divider {
-    border: none;
-    border-top: 1px solid var(--line);
-    margin: 0;
-  }
-
-  /* ---------- How it works ---------- */
-  .steps {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1px;
-    background: var(--line);
-    border: 1px solid var(--line);
-    border-radius: 16px;
-    overflow: hidden;
-  }
-  @media (max-width: 860px) {
-    .steps { grid-template-columns: 1fr 1fr; }
-  }
-  @media (max-width: 540px) {
-    .steps { grid-template-columns: 1fr; }
-  }
-  .step {
-    background: var(--neutral);
-    padding: 30px 24px;
-    transition: background .2s ease;
-  }
-  .step:hover { background: var(--neutral-raised); }
-  .step .num {
-    font-family: "IBM Plex Mono", monospace;
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--accent-deep);
-  }
-  .step h3 {
-    font-family: "Plus Jakarta Sans", sans-serif;
-    font-size: 1.02rem;
-    font-weight: 700;
-    margin-top: 14px;
-  }
-  .step p {
-    margin: 8px 0 0;
-    color: var(--ink-soft);
-    font-size: 0.92rem;
-  }
-
-  /* ---------- Trust ---------- */
-  .trust {
-    background: var(--neutral-raised);
-    border-radius: 22px;
-    border: 1px solid var(--line);
-    padding: 48px;
-    display: grid;
-    grid-template-columns: 1.1fr 0.9fr;
-    gap: 44px;
-    align-items: center;
-  }
-  @media (max-width: 860px) {
-    .trust { grid-template-columns: 1fr; padding: 32px 24px; }
-  }
-  .trust h2 { font-size: clamp(1.6rem, 2.8vw, 2.1rem); }
-  .trust p { color: var(--ink-soft); margin: 16px 0 0; max-width: 50ch; }
-  .ledger-flow {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    flex-wrap: wrap;
-  }
-  .ledger-step {
-    font-family: "IBM Plex Mono", monospace;
-    font-size: 0.72rem;
-    font-weight: 600;
-    letter-spacing: 0.03em;
-    padding: 10px 14px;
-    border-radius: 8px;
-    border: 1px solid var(--line);
-    background: var(--neutral);
-    color: var(--ink-soft);
-  }
-  .ledger-step.active {
-    border-color: var(--primary);
-    color: var(--primary-deep);
-    background: var(--primary-light);
-  }
-  .ledger-arrow { color: var(--line); font-size: 0.9rem; }
-
-  /* ---------- Tiers ---------- */
-  .tier-table {
-    width: 100%;
-    border-collapse: collapse;
-    border: 1px solid var(--line);
-    border-radius: 16px;
-    overflow: hidden;
-  }
-  .tier-table thead th {
-    text-align: left;
-    font-size: 0.76rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--ink-soft);
-    background: var(--neutral-raised);
-    padding: 14px 20px;
-    border-bottom: 1px solid var(--line);
-  }
-  .tier-table td {
-    padding: 18px 20px;
-    border-bottom: 1px solid var(--line);
-    font-size: 0.95rem;
-  }
-  .tier-table tr:last-child td { border-bottom: none; }
-  .tier-table tr { transition: background .15s ease; }
-  .tier-table tbody tr:hover { background: var(--neutral-raised); }
-  .tier-name {
-    font-family: "Baloo 2", sans-serif;
-    font-weight: 600;
-    font-size: 1.05rem;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .tier-dot { width: 10px; height: 10px; border-radius: 50%; }
-  .tier-dot.silver { background: #9AA5AE; }
-  .tier-dot.gold { background: var(--accent); }
-  .tier-dot.platinum { background: var(--primary-deep); }
-  .tier-table .num-cell { font-family: "IBM Plex Mono", monospace; font-variant-numeric: tabular-nums; }
-  .tier-boost {
-    color: var(--primary-deep);
-    font-weight: 700;
-  }
-  .table-scroll { overflow-x: auto; }
-  .table-note {
-    margin-top: 16px;
-    font-size: 0.86rem;
-    color: var(--ink-soft);
-  }
-
-  /* ---------- Referral ---------- */
-  .referral {
-    display: grid;
-    grid-template-columns: 0.9fr 1.1fr;
-    gap: 48px;
-    align-items: center;
-  }
-  @media (max-width: 860px) { .referral { grid-template-columns: 1fr; } }
-  .referral-card {
-    background: linear-gradient(155deg, var(--ink) 0%, color-mix(in srgb, var(--ink) 82%, var(--primary-deep) 18%) 100%);
-    color: var(--neutral);
-    border-radius: 20px;
-    padding: 32px;
-    transition: transform .25s ease;
-  }
-  .referral-card:hover { transform: translateY(-4px); }
-  .referral-card .amount {
-    font-family: "IBM Plex Mono", monospace;
-    font-size: 2.6rem;
-    font-weight: 600;
-    color: var(--accent-soft);
-    margin-top: 6px;
-  }
-  .referral-card .label {
-    font-size: 0.8rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    opacity: 0.75;
-  }
-  .referral-card .caption {
-    margin-top: 18px;
-    font-size: 0.88rem;
-    opacity: 0.82;
-    line-height: 1.6;
-  }
-  .referral-copy h2 { font-size: clamp(1.6rem, 2.8vw, 2.1rem); }
-  .referral-copy p { color: var(--ink-soft); margin-top: 16px; }
-  .referral-copy .callout {
-    margin-top: 20px;
-    padding: 16px 18px;
-    border-left: 3px solid var(--primary);
-    background: var(--neutral-raised);
-    border-radius: 0 10px 10px 0;
-    font-size: 0.92rem;
-    color: var(--ink-soft);
-  }
-
-  /* ---------- Footer ---------- */
-  footer.site {
-    border-top: 1px solid var(--line);
-    padding: 40px 0;
-  }
-  .footer-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 16px;
-  }
-  .footer-brand { display: flex; flex-direction: column; gap: 6px; }
-  .footer-tagline {
-    font-size: 0.85rem;
-    color: var(--ink-soft);
-  }
-  .footer-note {
-    font-size: 0.85rem;
-    color: var(--ink-soft);
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    * { animation: none !important; transition: none !important; }
-  }
+  /* ---------- footer ---------- */
+  footer{border-top:1px solid var(--line);padding:44px 0 30px;}
+  .footer-grid{display:grid;gap:32px;}
+  @media(min-width:720px){.footer-grid{grid-template-columns:1.2fr 1fr 1fr;}}
+  footer .brand{margin-bottom:10px;}
+  footer .col p{color:var(--ink-dim);font-size:.88rem;line-height:1.6;}
+  footer h4{font-size:.78rem;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin-bottom:14px;}
+  footer .col a{display:flex;align-items:center;gap:9px;font-size:.92rem;color:var(--ink);text-decoration:none;margin-bottom:12px;font-weight:600;}
+  footer .col a:hover{color:var(--orange);}
+  footer .col a svg{flex-shrink:0;color:var(--ink-dim);}
+  .footer-bottom{margin-top:36px;padding-top:22px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;font-size:.8rem;color:var(--muted);}
 </style>
 </head>
 <body>
 
-<header class="site">
-  <div class="wrap nav-row">
-    <a class="wordmark" href="#top">
-      <svg class="logo-mark" viewBox="0 0 36 36" fill="none" aria-hidden="true">
-        <defs>
-          <linearGradient id="logoGrad" x1="4" y1="4" x2="32" y2="32" gradientUnits="userSpaceOnUse">
-            <stop stop-color="#2680C2"/>
-            <stop offset="1" stop-color="#F2901E"/>
-          </linearGradient>
-        </defs>
-        <path d="M27.5 10.5A11.5 11.5 0 1 0 29.6 22" stroke="url(#logoGrad)" stroke-width="3.4" stroke-linecap="round"/>
-        <path d="M27 4v8h-8" stroke="url(#logoGrad)" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-      Oleraa
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#top">
+      <span class="brand-mark">O</span>
+      <span>oleraa</span>
     </a>
-    <nav class="nav-links">
-      <a href="#cara-kerja">Cara Kerja</a>
-      <a href="#tingkatan">Tingkatan</a>
-      <a href="#ajak-teman">Ajak Teman</a>
-    </nav>
+    <ul class="nav-links">
+      <li><a href="#cara-kerja">Cara Kerja</a></li>
+      <li><a href="#tingkatan">Tingkatan</a></li>
+      <li><a href="#ajak-teman">Ajak Teman</a></li>
+      <li><a href="#kontak">Kontak</a></li>
+    </ul>
+    <a class="btn btn-soon nav-cta" href="#kontak">Segera di Play Store</a>
   </div>
 </header>
 
 <main id="top">
-  <div class="wrap">
-    <section class="hero" style="padding-top: 56px;">
+
+  <section class="hero">
+    <div class="wrap hero-grid">
       <div>
-        <span class="eyebrow" data-hero>Cashback belanja online</span>
-        <h1 data-hero>Belanja seperti biasa.<br>Uangnya <em>balik lagi.</em></h1>
-        <p class="lede" data-hero>Klik tautan belanja Oleraa sebelum checkout di Shopee atau TikTok Shop. Cashback-nya otomatis tercatat ke saldo kamu — tinggal dicairkan kapan pun kamu siap.</p>
-        <div class="cta-row" data-hero>
-          <a class="btn" href="#cara-kerja">Lihat cara kerjanya</a>
-          <span class="fine-note">Gratis selamanya. Tidak ada biaya pendaftaran.</span>
+        <span class="eyebrow">Cashback belanja online</span>
+        <h1>Belanja seperti biasa,<br><span>dapat cashback-nya.</span></h1>
+        <p class="lead">Klik link Oleraa sebelum checkout di Shopee atau TikTok Shop, lanjut belanja seperti biasa. Tidak ada kode khusus, tidak ada langkah tambahan saat checkout — cashback otomatis masuk ke saldo kamu.</p>
+        <div class="hero-actions">
+          <a class="btn btn-soon" href="#kontak">📱 Segera Hadir di Play Store</a>
+          <a class="btn btn-ghost" href="#cara-kerja">Lihat Cara Kerja</a>
+        </div>
+        <p class="hero-note">Oleraa masih dalam tahap persiapan peluncuran — pantau Instagram &amp; TikTok kami untuk kabar terbaru.</p>
+      </div>
+
+      <div class="hero-card" aria-hidden="true">
+        <div class="hero-card-head">
+          <span class="hero-card-label">Saldo Cashback</span>
+          <span class="hero-card-pill">Tersedia</span>
+        </div>
+        <div class="hero-balance"><small>Total saldo</small>Rp•••.•••</div>
+        <div class="hero-steps">
+          <div class="hero-step done"><span class="dot">✓</span> Klik link Oleraa</div>
+          <div class="hero-step done"><span class="dot">✓</span> Belanja di Shopee/TikTok Shop</div>
+          <div class="hero-step"><span class="dot">3</span> Cashback terverifikasi</div>
+          <div class="hero-step"><span class="dot">4</span> Tarik ke bank / e-wallet</div>
         </div>
       </div>
-      <div class="app-card" data-hero>
-        <div class="brand-row">
-          <svg class="logo-mark" style="width:18px;height:18px;" viewBox="0 0 36 36" fill="none" aria-hidden="true">
-            <path d="M27.5 10.5A11.5 11.5 0 1 0 29.6 22" stroke="url(#logoGrad)" stroke-width="4" stroke-linecap="round"/>
-            <path d="M27 4v8h-8" stroke="url(#logoGrad)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-          Beranda Oleraa
-        </div>
-        <div class="balance-block">
-          <div class="balance-label">Saldo Tersedia</div>
-          <div class="balance-amount mono">Rp 184.500</div>
-          <div class="balance-sub">
-            <span>Saldo Tertunda</span>
-            <span class="mono">Rp 32.000</span>
-          </div>
-        </div>
-        <div class="tx-list">
-          <div class="tx-row">
-            <div>
-              <div class="tx-name">Shopee</div>
-              <div class="tx-meta">Cashback transaksi</div>
-            </div>
-            <div style="text-align:right;">
-              <div class="tx-amount mono">+Rp 18.400</div>
-              <div style="margin-top:4px;"><span class="status-pill">Verified</span></div>
-            </div>
-          </div>
-          <div class="tx-row">
-            <div>
-              <div class="tx-name">TikTok Shop</div>
-              <div class="tx-meta">Cashback transaksi</div>
-            </div>
-            <div style="text-align:right;">
-              <div class="tx-amount mono">+Rp 9.200</div>
-              <div style="margin-top:4px;"><span class="status-pill">Pending</span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  </div>
+    </div>
+  </section>
 
-  <hr class="divider">
-
-  <div class="wrap">
-    <section id="cara-kerja">
+  <section id="cara-kerja">
+    <div class="wrap">
       <div class="section-head">
-        <span class="kicker">Cara Kerja</span>
-        <h2>Empat langkah, tidak ada yang rumit</h2>
-        <p>Tidak ada kode khusus, tidak ada langkah tambahan saat checkout. Cukup mulai dari tautan Oleraa.</p>
+        <span class="eyebrow">Cara kerja</span>
+        <h2>Cuma 4 langkah, gak ribet</h2>
+        <p>Belanja seperti biasa lewat aplikasi/situs merchant favoritmu — Oleraa cuma nambahin cashback di belakang layar.</p>
       </div>
-      <div class="steps">
-        <div class="step">
-          <div class="num">01</div>
-          <h3>Salin tautan belanja</h3>
-          <p>Buka halaman Merchant di Oleraa, pilih Shopee atau TikTok Shop, salin tautan belanjanya.</p>
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-num">1</div>
+          <h3>Klik link Oleraa</h3>
+          <p>Buka produk/toko lewat link cashback Oleraa sebelum mulai belanja.</p>
         </div>
-        <div class="step">
-          <div class="num">02</div>
-          <h3>Checkout seperti biasa</h3>
-          <p>Beli produk lewat tautan itu. Prosesnya sama persis seperti belanja biasa.</p>
+        <div class="step-card">
+          <div class="step-num">2</div>
+          <h3>Belanja seperti biasa</h3>
+          <p>Checkout normal di Shopee atau TikTok Shop — tanpa kode promo tambahan.</p>
         </div>
-        <div class="step">
-          <div class="num">03</div>
-          <h3>Cashback masuk ke saldo</h3>
-          <p>Setelah transaksi terverifikasi merchant, cashback otomatis tercatat ke saldo Oleraa kamu.</p>
+        <div class="step-card">
+          <div class="step-num">3</div>
+          <h3>Cashback tercatat</h3>
+          <p>Transaksi diverifikasi merchant, cashback masuk ke saldo kamu secara otomatis.</p>
         </div>
-        <div class="step">
-          <div class="num">04</div>
-          <h3>Cairkan kapan saja</h3>
-          <p>Tarik saldo ke rekening bank atau e-wallet. Setiap pencairan ditinjau dulu sebelum dana dikirim.</p>
+        <div class="step-card">
+          <div class="step-num">4</div>
+          <h3>Tarik kapan saja</h3>
+          <p>Cairkan saldo cashback ke rekening bank atau e-wallet, kapan pun kamu mau.</p>
         </div>
       </div>
-    </section>
-  </div>
+      <div class="step-flow">
+        <span class="flow-pill">Pending</span>→
+        <span class="flow-pill on">Verified</span>→
+        <span class="flow-pill on">Paid</span>
+      </div>
+    </div>
+  </section>
 
-  <div class="wrap">
-    <section class="trust">
-      <div>
-        <h2>Uang beneran, bukan sekadar poin</h2>
-        <p>Setiap rupiah cashback di Oleraa berasal dari transaksi belanja yang benar-benar terjadi — bukan dari uang pengguna lain, dan bukan dari biaya pendaftaran siapa pun. Status saldo kamu selalu jelas dari awal sampai cair.</p>
-      </div>
-      <div class="ledger-flow">
-        <span class="ledger-step">PENDING</span>
-        <span class="ledger-arrow">→</span>
-        <span class="ledger-step active">VERIFIED</span>
-        <span class="ledger-arrow">→</span>
-        <span class="ledger-step">PAID</span>
-      </div>
-    </section>
-  </div>
-
-  <div class="wrap">
-    <section id="tingkatan">
+  <section id="tingkatan" class="tier-band">
+    <div class="wrap">
       <div class="section-head">
-        <span class="kicker">Tingkatan</span>
-        <h2>Makin sering belanja, makin besar cashback-nya</h2>
-        <p>Naik tingkat dihitung dari total transaksi terverifikasi kamu dalam 30 hari terakhir — bukan dari jumlah orang yang kamu ajak.</p>
+        <span class="eyebrow">Title Pembeli</span>
+        <h2>Makin sering belanja, makin gede cashback-nya</h2>
+        <p>Tingkatan Oleraa dihitung dari total belanja kamu — makin tinggi tingkatannya, makin besar bonus &amp; boost cashback yang kamu dapat.</p>
       </div>
-      <div class="table-scroll">
-        <table class="tier-table">
-          <thead>
-            <tr>
-              <th>Tingkatan</th>
-              <th>Belanja 30 hari terakhir</th>
-              <th>Bonus langsung</th>
-              <th>Boost cashback</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><span class="tier-name"><span class="tier-dot silver"></span>Silver</span></td>
-              <td class="num-cell">Rp 500.000</td>
-              <td class="num-cell">+Rp 25.000</td>
-              <td class="tier-boost num-cell">+2%</td>
-            </tr>
-            <tr>
-              <td><span class="tier-name"><span class="tier-dot gold"></span>Gold</span></td>
-              <td class="num-cell">Rp 2.000.000</td>
-              <td class="num-cell">+Rp 100.000</td>
-              <td class="tier-boost num-cell">+5%</td>
-            </tr>
-            <tr>
-              <td><span class="tier-name"><span class="tier-dot platinum"></span>Platinum</span></td>
-              <td class="num-cell">Rp 5.000.000</td>
-              <td class="num-cell">+Rp 300.000</td>
-              <td class="tier-boost num-cell">+10%</td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="tier-grid">
+        <div class="tier-card tier-reguler">
+          <span class="tier-badge">Reguler</span>
+          <p>Tingkatan awal begitu kamu mulai belanja lewat Oleraa.</p>
+        </div>
+        <div class="tier-card tier-silver">
+          <span class="tier-badge">Silver</span>
+          <p>Bonus &amp; boost cashback tambahan setelah volume belanjamu naik.</p>
+        </div>
+        <div class="tier-card tier-gold">
+          <span class="tier-badge">Gold</span>
+          <p>Cashback makin besar buat pembelanja yang makin aktif.</p>
+        </div>
+        <div class="tier-card tier-platinum">
+          <span class="tier-badge">Platinum</span>
+          <p>Tingkatan tertinggi dengan bonus &amp; boost cashback paling besar.</p>
+        </div>
       </div>
-      <p class="table-note">Boost cashback berlaku selama tingkatanmu aktif, dihitung ulang tiap periode 30 hari berjalan.</p>
-    </section>
-  </div>
+      <p class="tier-note">Detail lengkap syarat &amp; besaran tiap tingkatan bisa dicek langsung di app begitu kamu jadi member.</p>
+    </div>
+  </section>
 
-  <div class="wrap">
-    <section id="ajak-teman" class="referral">
+  <section id="ajak-teman">
+    <div class="wrap">
       <div class="referral-card">
-        <div class="label">Bonus per teman</div>
-        <div class="amount">Rp 10.000</div>
-        <div class="caption">Dibayarkan langsung oleh Oleraa begitu teman yang kamu ajak mendapat cashback pertamanya dari transaksi nyata — bukan hanya karena mereka mendaftar.</div>
+        <div>
+          <h2>Ajak teman, sama-sama dapat cashback</h2>
+          <p>Bagikan kode referral kamu ke teman. Begitu transaksi pertama mereka terverifikasi, kamu dapat bonus — otomatis masuk ke saldo, tanpa syarat ribet.</p>
+        </div>
+        <div class="referral-amount">
+          <div class="num">Rp10.000</div>
+          <div class="label">per teman berhasil diajak</div>
+        </div>
       </div>
-      <div class="referral-copy">
-        <h2>Ajak Teman</h2>
-        <p>Bagikan kode referral kamu. Begitu temanmu belanja lewat Oleraa dan cashback pertamanya terverifikasi, kalian berdua dapat bonus — kamu dan dia.</p>
-        <div class="callout">Bonus ajak-teman ini didanai langsung oleh Oleraa, bukan dari uang pengguna lain, dan tidak berjenjang dari siapa yang mereka ajak selanjutnya.</div>
-      </div>
-    </section>
-  </div>
+    </div>
+  </section>
+
 </main>
 
-<footer class="site">
-  <div class="wrap footer-row">
-    <div class="footer-brand">
-      <a class="wordmark" href="#top" style="font-size:1.15rem;">
-        <svg class="logo-mark" style="width:22px;height:22px;" viewBox="0 0 36 36" fill="none" aria-hidden="true">
-          <path d="M27.5 10.5A11.5 11.5 0 1 0 29.6 22" stroke="url(#logoGrad)" stroke-width="3.6" stroke-linecap="round"/>
-          <path d="M27 4v8h-8" stroke="url(#logoGrad)" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        Oleraa
-      </a>
-      <span class="footer-tagline">Belanja, dapat cashback, cair kapan aja.</span>
+<footer id="kontak">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="col">
+        <a class="brand" href="#top"><span class="brand-mark">O</span><span>oleraa</span></a>
+        <p>Platform cashback untuk belanja sehari-hari di Shopee &amp; TikTok Shop. Dikembangkan oleh PT Pusat Interior Indonesia.</p>
+      </div>
+      <div class="col">
+        <h4>Jelajahi</h4>
+        <a href="#cara-kerja">Cara Kerja</a>
+        <a href="#tingkatan">Tingkatan</a>
+        <a href="#ajak-teman">Ajak Teman</a>
+      </div>
+      <div class="col">
+        <h4>Kontak &amp; Sosial</h4>
+        <a href="https://wa.me/6285600544371" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+          +62 856-0054-4371 (WhatsApp)
+        </a>
+        <a href="https://www.instagram.com/oleraa.official/" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          @oleraa.official
+        </a>
+        <a href="https://www.tiktok.com/@oleraa.official" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
+          @oleraa.official
+        </a>
+      </div>
     </div>
-    <span class="footer-note">© 2026 Oleraa. Cashback dari transaksi nyata.</span>
+    <div class="footer-bottom">
+      <span>© 2026 PT Pusat Interior Indonesia. Semua hak dilindungi.</span>
+      <span>Oleraa masih dalam tahap persiapan peluncuran.</span>
+    </div>
   </div>
 </footer>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script>
-  // Load-time entrance for the hero only — never scroll-gated. Sections below the fold stay
-  // fully visible without JS so full-page screenshots (affiliate/payment verification tools
-  // that render the page without scrolling) never capture hidden content.
-  if (window.gsap && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    gsap.set('[data-hero]', { opacity: 0, y: 16 });
-    gsap.to('[data-hero]', { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out', stagger: 0.1, delay: 0.05 });
-  } else {
-    document.querySelectorAll('[data-hero]').forEach(function (el) { el.style.opacity = 1; });
-  }
-</script>
 
 </body>
 </html>
