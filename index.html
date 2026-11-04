@@ -3,293 +3,116 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Oleraa — Belanja di Shopee &amp; TikTok Shop, Dapat Cashback</title>
-<meta name="description" content="Klik link Oleraa sebelum checkout di Shopee atau TikTok Shop, belanja seperti biasa, cashback otomatis masuk ke saldo kamu.">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 34 34'%3E%3Crect width='34' height='34' rx='10' fill='%23F97316'/%3E%3Ctext x='17' y='24' font-family='Georgia,serif' font-weight='800' font-size='18' fill='white' text-anchor='middle'%3EO%3C/text%3E%3C/svg%3E">
+<title>oleraa: Cashback Belanja Online & Hotel</title>
+<meta name="description" content="oleraa adalah aplikasi cashback belanja online dan pemesanan hotel di Indonesia. Belanja atau pesan hotel lewat oleraa, sebagian komisi kembali ke kamu sebagai saldo cashback.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
-<style>
-  :root{
-    --ivory:#F7F6F2; --surface:#FFFFFF; --deep-navy:#101820;
-    --ink:#0B1F33; --ink-dim:#536273;
-    --orange:#F97316; --orange-pressed:#E8640D;
-    --gold:#C9A227; --gold-soft:#F3ECD8;
-    --teal:#119C8A; --teal-soft:#E3F3F0;
-    --pink:#DE5D83; --blue:#378DB8;
-    --line:#EAE2D2; --muted:#9BAAB5;
-    --radius-lg:22px; --radius-md:14px; --radius-pill:999px;
-    --shadow:0 12px 30px -12px rgba(11,31,51,.18);
-  }
-  *{box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
-  body{margin:0;font-family:'Plus Jakarta Sans',-apple-system,sans-serif;color:var(--ink);background:var(--ivory);-webkit-font-smoothing:antialiased;}
-  img,svg{display:block;max-width:100%;}
-  a{color:inherit;}
-  .wrap{max-width:1080px;margin:0 auto;padding:0 24px;}
-  h1,h2,h3{margin:0;text-wrap:balance;font-weight:800;}
-  p{margin:0;}
-
-  /* ---------- header ---------- */
-  header{position:sticky;top:0;z-index:20;background:rgba(247,246,242,.88);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);}
-  .nav{display:flex;align-items:center;justify-content:space-between;padding:16px 0;}
-  .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.15rem;color:var(--ink);text-decoration:none;}
-  .brand-mark{width:34px;height:34px;border-radius:10px;background:var(--orange);color:#fff;display:flex;align-items:center;justify-content:center;font-family:Georgia,serif;font-weight:800;font-size:1rem;flex-shrink:0;}
-  .nav-links{display:flex;gap:28px;list-style:none;margin:0;padding:0;}
-  .nav-links a{font-weight:600;font-size:.92rem;color:var(--ink-dim);text-decoration:none;}
-  .nav-links a:hover{color:var(--orange);}
-  .nav-cta{display:none;}
-  @media(min-width:720px){.nav-cta{display:inline-flex;}}
-  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:none;cursor:pointer;font-family:inherit;font-weight:700;font-size:.92rem;text-decoration:none;border-radius:var(--radius-pill);padding:13px 24px;transition:transform .15s ease,background .15s ease;}
-  .btn:active{transform:scale(.97);}
-  .btn-primary{background:var(--orange);color:#fff;}
-  .btn-primary:hover{background:var(--orange-pressed);}
-  .btn-ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line);}
-  .btn-ghost:hover{border-color:var(--orange);color:var(--orange);}
-  .btn-soon{background:var(--gold-soft);color:#7A6116;cursor:default;}
-
-  /* ---------- hero ---------- */
-  .hero{padding:64px 0 56px;}
-  .hero-grid{display:grid;gap:40px;align-items:center;}
-  @media(min-width:860px){.hero-grid{grid-template-columns:1.05fr .95fr;gap:56px;}}
-  .eyebrow{display:inline-flex;align-items:center;gap:8px;background:var(--gold-soft);color:#7A6116;font-weight:700;font-size:.78rem;letter-spacing:.03em;padding:7px 14px;border-radius:var(--radius-pill);text-transform:uppercase;}
-  .hero h1{font-size:clamp(1.9rem,4.4vw,3rem);line-height:1.12;margin-top:18px;}
-  .hero h1 span{color:var(--orange);}
-  .hero p.lead{margin-top:18px;font-size:1.08rem;line-height:1.6;color:var(--ink-dim);max-width:46ch;}
-  .hero-actions{margin-top:28px;display:flex;flex-wrap:wrap;gap:14px;}
-  .hero-note{margin-top:14px;font-size:.83rem;color:var(--muted);}
-
-  .hero-card{position:relative;background:var(--surface);border-radius:var(--radius-lg);box-shadow:var(--shadow);padding:28px;border:1px solid var(--line);}
-  .hero-card-head{display:flex;align-items:center;justify-content:space-between;}
-  .hero-card-label{font-size:.8rem;color:var(--ink-dim);font-weight:600;}
-  .hero-card-pill{background:var(--teal-soft);color:var(--teal);font-size:.72rem;font-weight:700;padding:4px 10px;border-radius:var(--radius-pill);}
-  .hero-balance{margin-top:14px;font-size:2.1rem;font-weight:800;color:var(--ink);}
-  .hero-balance small{display:block;font-size:.85rem;font-weight:600;color:var(--ink-dim);margin-bottom:2px;}
-  .hero-steps{margin-top:24px;display:flex;flex-direction:column;gap:14px;}
-  .hero-step{display:flex;align-items:center;gap:12px;font-size:.88rem;color:var(--ink-dim);}
-  .hero-step .dot{width:26px;height:26px;border-radius:50%;background:var(--gold-soft);color:var(--gold);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.78rem;flex-shrink:0;}
-  .hero-step.done .dot{background:var(--teal-soft);color:var(--teal);}
-  .hero-step.done{color:var(--ink);font-weight:600;}
-
-  /* ---------- shared section ---------- */
-  section{padding:60px 0;}
-  .section-head{max-width:640px;margin:0 auto 40px;text-align:center;}
-  .section-head .eyebrow{margin-bottom:14px;}
-  .section-head h2{font-size:clamp(1.5rem,3vw,2.1rem);}
-  .section-head p{margin-top:12px;color:var(--ink-dim);font-size:1.02rem;line-height:1.6;}
-
-  /* ---------- cara kerja ---------- */
-  .steps-grid{display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));}
-  .step-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:26px 22px;}
-  .step-num{width:36px;height:36px;border-radius:11px;background:var(--gold-soft);color:var(--gold);display:flex;align-items:center;justify-content:center;font-weight:800;}
-  .step-card h3{margin-top:16px;font-size:1.02rem;}
-  .step-card p{margin-top:8px;font-size:.9rem;color:var(--ink-dim);line-height:1.55;}
-  .step-flow{margin-top:36px;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px;font-size:.82rem;font-weight:700;color:var(--ink-dim);}
-  .flow-pill{padding:7px 14px;border-radius:var(--radius-pill);background:var(--surface);border:1px solid var(--line);}
-  .flow-pill.on{background:var(--teal-soft);color:var(--teal);border-color:transparent;}
-
-  /* ---------- tingkatan ---------- */
-  .tier-band{background:var(--deep-navy);color:#fff;}
-  .tier-band .section-head p{color:#9FB4C4;}
-  .tier-band .eyebrow{background:rgba(201,162,39,.18);color:var(--gold);}
-  .tier-grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));}
-  .tier-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:var(--radius-lg);padding:22px;}
-  .tier-badge{display:inline-block;font-size:.72rem;font-weight:800;letter-spacing:.04em;text-transform:uppercase;padding:5px 12px;border-radius:var(--radius-pill);margin-bottom:14px;}
-  .tier-card p{font-size:.86rem;color:#B9C6D1;line-height:1.55;}
-  .tier-reguler .tier-badge{background:rgba(55,141,184,.22);color:#7FC2E8;}
-  .tier-silver .tier-badge{background:rgba(155,170,181,.22);color:#D3DCE2;}
-  .tier-gold .tier-badge{background:rgba(201,162,39,.22);color:#E7C769;}
-  .tier-platinum .tier-badge{background:rgba(222,93,131,.22);color:#F3A9C0;}
-  .tier-note{margin-top:28px;text-align:center;font-size:.85rem;color:#8EA1AF;}
-
-  /* ---------- ajak teman ---------- */
-  .referral-card{background:linear-gradient(135deg,var(--gold-soft),var(--surface));border:1px solid var(--line);border-radius:var(--radius-lg);padding:36px;display:grid;gap:28px;align-items:center;}
-  @media(min-width:760px){.referral-card{grid-template-columns:1fr auto;}}
-  .referral-card h2{font-size:1.5rem;}
-  .referral-card p{margin-top:10px;color:var(--ink-dim);line-height:1.6;max-width:52ch;}
-  .referral-amount{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:22px 30px;text-align:center;box-shadow:var(--shadow);}
-  .referral-amount .num{font-size:1.9rem;font-weight:800;color:var(--gold);}
-  .referral-amount .label{font-size:.8rem;color:var(--ink-dim);font-weight:600;margin-top:4px;}
-
-  /* ---------- footer ---------- */
-  footer{border-top:1px solid var(--line);padding:44px 0 30px;}
-  .footer-grid{display:grid;gap:32px;}
-  @media(min-width:720px){.footer-grid{grid-template-columns:1.2fr 1fr 1fr;}}
-  footer .brand{margin-bottom:10px;}
-  footer .col p{color:var(--ink-dim);font-size:.88rem;line-height:1.6;}
-  footer h4{font-size:.78rem;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin-bottom:14px;}
-  footer .col a{display:flex;align-items:center;gap:9px;font-size:.92rem;color:var(--ink);text-decoration:none;margin-bottom:12px;font-weight:600;}
-  footer .col a:hover{color:var(--orange);}
-  footer .col a svg{flex-shrink:0;color:var(--ink-dim);}
-  .footer-bottom{margin-top:36px;padding-top:22px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;font-size:.8rem;color:var(--muted);}
-</style>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-<header>
-  <div class="wrap nav">
-    <a class="brand" href="#top">
-      <span class="brand-mark">O</span>
-      <span>oleraa</span>
-    </a>
-    <ul class="nav-links">
-      <li><a href="#cara-kerja">Cara Kerja</a></li>
-      <li><a href="#tingkatan">Tingkatan</a></li>
-      <li><a href="#ajak-teman">Ajak Teman</a></li>
-      <li><a href="#kontak">Kontak</a></li>
-    </ul>
-    <a class="btn btn-soon nav-cta" href="#kontak">Segera di Play Store</a>
+<header class="site-header">
+  <div class="wrap">
+    <a class="wordmark" href="index.html">olera<span>a</span></a>
+    <nav class="site-nav" aria-label="Menu utama">
+      <a href="index.html" aria-current="page">Beranda</a>
+      <a href="cashback-travel.html">Cashback Travel</a>
+      <a href="faq.html">FAQ</a>
+      <a href="tentang.html">Tentang Kami</a>
+    </nav>
   </div>
 </header>
-
-<main id="top">
-
-  <section class="hero">
-    <div class="wrap hero-grid">
-      <div>
-        <span class="eyebrow">Cashback belanja online</span>
-        <h1>Belanja seperti biasa,<br><span>dapat cashback-nya.</span></h1>
-        <p class="lead">Klik link Oleraa sebelum checkout di Shopee atau TikTok Shop, lanjut belanja seperti biasa. Tidak ada kode khusus, tidak ada langkah tambahan saat checkout — cashback otomatis masuk ke saldo kamu.</p>
-        <div class="hero-actions">
-          <a class="btn btn-soon" href="#kontak">📱 Segera Hadir di Play Store</a>
-          <a class="btn btn-ghost" href="#cara-kerja">Lihat Cara Kerja</a>
-        </div>
-        <p class="hero-note">Oleraa masih dalam tahap persiapan peluncuran — pantau Instagram &amp; TikTok kami untuk kabar terbaru.</p>
+<main>
+<div class="wrap">
+  <div class="hero hero-split">
+    <div>
+      <p class="eyebrow">Aplikasi cashback · Indonesia</p>
+      <h1>Belanja &amp; pesan hotel seperti biasa, dapat <em>cashback</em>.</h1>
+      <p>oleraa adalah aplikasi cashback untuk belanja online dan pemesanan hotel. Kamu belanja di marketplace atau pesan hotel di situs travel lewat link dari oleraa. Partner membayar komisi ke oleraa, lalu sebagian komisi itu kami kembalikan ke kamu sebagai saldo cashback.</p>
+      <div class="cta-row">
+        <a class="btn" href="#cara-kerja">Lihat cara kerjanya</a>
+        <a class="btn btn-ghost" href="cashback-travel.html">Cashback hotel &amp; travel</a>
       </div>
+    </div>
+    <figure class="phone">
+      <img src="img/app-beranda.jpg" alt="Tampilan Beranda aplikasi oleraa: panduan cashback dan daftar marketplace" width="702" height="1379">
+    </figure>
+  </div>
 
-      <div class="hero-card" aria-hidden="true">
-        <div class="hero-card-head">
-          <span class="hero-card-label">Saldo Cashback</span>
-          <span class="hero-card-pill">Tersedia</span>
-        </div>
-        <div class="hero-balance"><small>Total saldo</small>Rp•••.•••</div>
-        <div class="hero-steps">
-          <div class="hero-step done"><span class="dot">✓</span> Klik link Oleraa</div>
-          <div class="hero-step done"><span class="dot">✓</span> Belanja di Shopee/TikTok Shop</div>
-          <div class="hero-step"><span class="dot">3</span> Cashback terverifikasi</div>
-          <div class="hero-step"><span class="dot">4</span> Tarik ke bank / e-wallet</div>
-        </div>
+  <section aria-labelledby="partner">
+    <h2 id="partner">Tempat kamu bisa dapat cashback</h2>
+    <p class="section-sub">Belanja online</p>
+    <ul class="logos">
+      <li><img src="img/logo-shopee.png" alt="Shopee" width="64" height="64"><span>Shopee</span></li><li><img src="img/logo-tiktok.png" alt="TikTok Shop" width="64" height="64"><span>TikTok Shop</span></li><li><img src="img/logo-tokopedia.png" alt="Tokopedia" width="64" height="64"><span>Tokopedia</span></li><li><img src="img/logo-lazada.png" alt="Lazada" width="64" height="64"><span>Lazada</span></li><li><img src="img/logo-blibli.png" alt="Blibli" width="64" height="64"><span>Blibli</span></li><li><img src="img/logo-shopeefood.png" alt="ShopeeFood" width="64" height="64"><span>ShopeeFood</span></li>
+    </ul>
+    <p class="section-sub">Hotel &amp; travel</p>
+    <ul class="logos">
+      <li><img src="img/logo-traveloka.png" alt="Traveloka" width="64" height="64"><span>Traveloka</span></li><li><img src="img/logo-tiket.png" alt="tiket.com" width="64" height="64"><span>tiket.com</span></li>
+    </ul>
+    <p class="fineprint">Nama dan logo di atas adalah merek dagang milik masing-masing pemiliknya. oleraa bekerja sama melalui program afiliasi dan tidak berafiliasi resmi dengan perusahaan tersebut. Besaran cashback mengikuti ketentuan tiap program dan bisa berubah.</p>
+  </section>
+
+  <section aria-labelledby="cara-kerja">
+    <h2 id="cara-kerja">Cara kerjanya</h2>
+    <ol class="steps">
+      <li><strong>Salin link produk atau hotel</strong><span>Salin link dari aplikasi marketplace atau situs travel, lalu buka oleraa. Halaman produknya langsung muncul beserta perkiraan cashback.</span></li>
+      <li><strong>Lanjutkan belanja lewat oleraa</strong><span>Ketuk tombol beli atau pesan. oleraa meneruskanmu ke aplikasi atau situs partner dengan link khusus, supaya pembelianmu tercatat atas namamu.</span></li>
+      <li><strong>Pantau di Pesanan Saya</strong><span>Pembelian muncul sebagai pesanan yang sedang dilacak. Setelah partner mengonfirmasi, cashback masuk sebagai saldo tertunda.</span></li>
+      <li><strong>Cairkan saldo</strong><span>Setelah masa tunggu selesai dan pesanan tidak dibatalkan, saldo bisa dicairkan ke rekening atas namamu sendiri.</span></li>
+    </ol>
+  </section>
+
+  <section aria-labelledby="kenapa">
+    <h2 id="kenapa">Kenapa oleraa</h2>
+    <div class="cards">
+      <div class="card"><h3>Gratis</h3><p>Tidak ada biaya daftar atau biaya bulanan. Harga barang dan hotel sama seperti kalau kamu beli langsung.</p></div>
+      <div class="card"><h3>Transparan</h3><p>Status setiap pesanan bisa dilihat di aplikasi: sedang dilacak, menunggu persetujuan, sampai cashback masuk.</p></div>
+      <div class="card"><h3>Cashback dari transaksi nyata</h3><p>Cashback hanya diberikan untuk pesanan yang selesai dan dikonfirmasi partner. Pesanan yang dibatalkan tidak mendapat cashback.</p></div>
+    </div>
+  </section>
+
+  <section class="download" aria-labelledby="unduh">
+    <div>
+      <h2 id="unduh">Aplikasi oleraa untuk Android</h2>
+      <p>Aplikasi oleraa sedang dalam tahap akhir sebelum rilis di Google Play. Ikuti media sosial kami untuk kabar rilisnya, atau hubungi kami lewat WhatsApp kalau ingin ikut uji coba.</p>
+      <div class="cta-row">
+        <span class="badge-soon">Segera hadir di Google Play</span>
+        <a class="btn btn-ghost" href="https://wa.me/6285600544371?text=Halo%20oleraa%2C%20saya%20ingin%20ikut%20uji%20coba%20aplikasi">Ikut uji coba</a>
       </div>
     </div>
   </section>
 
-  <section id="cara-kerja">
-    <div class="wrap">
-      <div class="section-head">
-        <span class="eyebrow">Cara kerja</span>
-        <h2>Cuma 4 langkah, gak ribet</h2>
-        <p>Belanja seperti biasa lewat aplikasi/situs merchant favoritmu — Oleraa cuma nambahin cashback di belakang layar.</p>
-      </div>
-      <div class="steps-grid">
-        <div class="step-card">
-          <div class="step-num">1</div>
-          <h3>Klik link Oleraa</h3>
-          <p>Buka produk/toko lewat link cashback Oleraa sebelum mulai belanja.</p>
-        </div>
-        <div class="step-card">
-          <div class="step-num">2</div>
-          <h3>Belanja seperti biasa</h3>
-          <p>Checkout normal di Shopee atau TikTok Shop — tanpa kode promo tambahan.</p>
-        </div>
-        <div class="step-card">
-          <div class="step-num">3</div>
-          <h3>Cashback tercatat</h3>
-          <p>Transaksi diverifikasi merchant, cashback masuk ke saldo kamu secara otomatis.</p>
-        </div>
-        <div class="step-card">
-          <div class="step-num">4</div>
-          <h3>Tarik kapan saja</h3>
-          <p>Cairkan saldo cashback ke rekening bank atau e-wallet, kapan pun kamu mau.</p>
-        </div>
-      </div>
-      <div class="step-flow">
-        <span class="flow-pill">Pending</span>→
-        <span class="flow-pill on">Verified</span>→
-        <span class="flow-pill on">Paid</span>
-      </div>
+  <section aria-labelledby="kontak">
+    <h2 id="kontak">Kontak</h2>
+    <div class="contact">
+      <dl>
+        <dt>Perusahaan</dt><dd>PT Oleraa Digital Indonesia</dd>
+        <dt>Alamat</dt><dd>Dusun Tonggowa, Desa Jatiarjo, Kecamatan Prigen, Kabupaten Pasuruan, Jawa Timur</dd>
+        <dt>Layanan pelanggan</dt><dd>WhatsApp <a href="https://wa.me/6285600544371">0856-0054-4371</a></dd>
+        <dt>Email</dt><dd><a href="mailto:oleraa.official@gmail.com">oleraa.official@gmail.com</a></dd>
+        <dt>Media sosial</dt><dd><a href="https://www.instagram.com/oleraa.official/">Instagram @oleraa.official</a> · <a href="https://www.tiktok.com/@oleraa.official">TikTok @oleraa.official</a></dd>
+      </dl>
     </div>
   </section>
-
-  <section id="tingkatan" class="tier-band">
-    <div class="wrap">
-      <div class="section-head">
-        <span class="eyebrow">Title Pembeli</span>
-        <h2>Makin sering belanja, makin gede cashback-nya</h2>
-        <p>Tingkatan Oleraa dihitung dari total belanja kamu — makin tinggi tingkatannya, makin besar bonus &amp; boost cashback yang kamu dapat.</p>
-      </div>
-      <div class="tier-grid">
-        <div class="tier-card tier-reguler">
-          <span class="tier-badge">Reguler</span>
-          <p>Tingkatan awal begitu kamu mulai belanja lewat Oleraa.</p>
-        </div>
-        <div class="tier-card tier-silver">
-          <span class="tier-badge">Silver</span>
-          <p>Bonus &amp; boost cashback tambahan setelah volume belanjamu naik.</p>
-        </div>
-        <div class="tier-card tier-gold">
-          <span class="tier-badge">Gold</span>
-          <p>Cashback makin besar buat pembelanja yang makin aktif.</p>
-        </div>
-        <div class="tier-card tier-platinum">
-          <span class="tier-badge">Platinum</span>
-          <p>Tingkatan tertinggi dengan bonus &amp; boost cashback paling besar.</p>
-        </div>
-      </div>
-      <p class="tier-note">Detail lengkap syarat &amp; besaran tiap tingkatan bisa dicek langsung di app begitu kamu jadi member.</p>
-    </div>
-  </section>
-
-  <section id="ajak-teman">
-    <div class="wrap">
-      <div class="referral-card">
-        <div>
-          <h2>Ajak teman, sama-sama dapat cashback</h2>
-          <p>Bagikan kode referral kamu ke teman. Begitu transaksi pertama mereka terverifikasi, kamu dapat bonus — otomatis masuk ke saldo, tanpa syarat ribet.</p>
-        </div>
-        <div class="referral-amount">
-          <div class="num">Rp10.000</div>
-          <div class="label">per teman berhasil diajak</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
+</div>
 </main>
-
-<footer id="kontak">
+<footer class="site-footer">
   <div class="wrap">
-    <div class="footer-grid">
-      <div class="col">
-        <a class="brand" href="#top"><span class="brand-mark">O</span><span>oleraa</span></a>
-        <p>Platform cashback untuk belanja sehari-hari di Shopee &amp; TikTok Shop. Dikembangkan oleh PT Pusat Interior Indonesia.</p>
-      </div>
-      <div class="col">
-        <h4>Jelajahi</h4>
-        <a href="#cara-kerja">Cara Kerja</a>
-        <a href="#tingkatan">Tingkatan</a>
-        <a href="#ajak-teman">Ajak Teman</a>
-      </div>
-      <div class="col">
-        <h4>Kontak &amp; Sosial</h4>
-        <a href="https://wa.me/6285600544371" target="_blank" rel="noopener">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-          +62 856-0054-4371 (WhatsApp)
-        </a>
-        <a href="https://www.instagram.com/oleraa.official/" target="_blank" rel="noopener">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-          @oleraa.official
-        </a>
-        <a href="https://www.tiktok.com/@oleraa.official" target="_blank" rel="noopener">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
-          @oleraa.official
-        </a>
-      </div>
+    <div>
+      <strong class="foot-brand">olera<span>a</span></strong>
+      <span>&copy; 2026 PT Oleraa Digital Indonesia</span>
     </div>
-    <div class="footer-bottom">
-      <span>© 2026 PT Pusat Interior Indonesia. Semua hak dilindungi.</span>
-      <span>Oleraa masih dalam tahap persiapan peluncuran.</span>
-    </div>
+    <nav aria-label="Tautan kaki">
+      <a href="cashback-travel.html">Cashback Travel</a>
+      <a href="faq.html">FAQ</a>
+      <a href="tentang.html">Tentang Kami</a>
+      <a href="kebijakan-privasi.html">Kebijakan Privasi</a>
+      <a href="syarat-ketentuan.html">Syarat &amp; Ketentuan</a>
+      <a href="hapus-akun.html">Hapus Akun</a>
+      <a href="https://www.instagram.com/oleraa.official/">Instagram</a>
+      <a href="https://www.tiktok.com/@oleraa.official">TikTok</a>
+    </nav>
   </div>
 </footer>
-
 </body>
 </html>
