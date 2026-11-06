@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "id.oleraa.app",
+      "sha256_cert_fingerprints": [
+        "E4:66:2D:A1:97:25:63:91:49:E8:BB:AF:F3:5C:60:23:1F:0E:6F:ED:D9:61:92:DB:35:D3:6B:18:54:68:66:8D"
+      ]
+    }
+  }
+]
