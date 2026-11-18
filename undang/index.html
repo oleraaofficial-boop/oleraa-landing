@@ -18,7 +18,7 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="../img/oleraa-icon-1024.png">
+<link rel="icon" type="image/png" href="../img/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -29,7 +29,7 @@
 body{background:#0e1b29;color:#fff;font-family:"Plus Jakarta Sans",system-ui,sans-serif;line-height:1.5;padding-bottom:96px}
 .wrap{max-width:480px;margin:0 auto;padding:0 16px}
 .top{display:flex;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid var(--line);max-width:480px;margin:0 auto}
-.wm{font-weight:800;font-size:20px;letter-spacing:-.3px}.wm span{color:var(--orange)}
+.wm{line-height:0}.wm img{height:26px;width:auto;display:block}
 .sep{width:1px;height:20px;background:var(--line)}
 .mini{display:flex;gap:4px;overflow:hidden}.mini img{width:22px;height:22px;border-radius:6px}
 .hero{margin-top:18px;border-radius:22px;overflow:hidden;background:linear-gradient(160deg,#1c3a5a,#0b1f33 70%);border:1px solid var(--line);text-align:center;padding:22px 18px 0;position:relative}
@@ -39,8 +39,8 @@ body{background:#0e1b29;color:#fff;font-family:"Plus Jakarta Sans",system-ui,san
 .hero h1{margin-top:14px;font-size:26px;font-weight:800;letter-spacing:-.3px}
 .hero p.sub{margin-top:6px;color:#c6d2dc;font-size:14px}
 .card{margin:20px auto 0;width:86%;height:120px;border-radius:18px 18px 0 0;background:linear-gradient(135deg,#f97316,#e8640d 60%,#c2410c);position:relative;box-shadow:0 -6px 24px rgba(249,115,22,.35)}
-.card .lg{position:absolute;left:18px;top:16px;font-weight:800;font-size:22px;color:#fff}
-.card .lg span{display:block;width:22px;height:4px;border-radius:2px;background:#fff;margin-top:2px}
+.card .lg{position:absolute;left:16px;top:16px;background:#fff;border-radius:10px;padding:5px 9px;line-height:0;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+.card .lg img{height:20px;width:auto;display:block}
 .card .chip{position:absolute;right:20px;top:20px;width:42px;height:32px;border-radius:7px;background:linear-gradient(135deg,#ffe2c4,#f6b77d)}
 .card .cd{position:absolute;left:18px;bottom:16px;font-size:12px;letter-spacing:2px;color:#ffe9d6}
 .codebox{margin-top:14px;display:flex;align-items:center;justify-content:center;gap:10px;font-size:14px;color:#c6d2dc}
@@ -77,7 +77,7 @@ h2{margin-top:34px;text-align:center;font-size:22px;font-weight:800;line-height:
 .sheet{position:fixed;left:0;right:0;bottom:0;z-index:21;background:#1a2633;border-radius:22px 22px 0 0;padding:10px 20px calc(22px + env(safe-area-inset-bottom));transform:translateY(105%);transition:transform .25s ease;max-width:520px;margin:0 auto}
 .sheet.open{transform:none}.sheet-bg.open{display:block}
 .grip{width:40px;height:4px;border-radius:2px;background:rgba(255,255,255,.25);margin:0 auto 16px}
-.sheet .wm{font-size:22px}
+.sheet .wm img{height:30px}
 .sheet h3{margin-top:8px;font-size:22px;font-weight:800}
 .sheet .tag{color:#c6d2dc;font-size:14px;margin-top:2px}
 .opt{margin-top:12px;display:flex;align-items:center;gap:12px;width:100%;padding:13px 18px;border-radius:999px;border:1px solid rgba(255,255,255,.28);background:transparent;color:#fff;font:inherit;font-size:15px;font-weight:600;text-decoration:none;cursor:pointer}
@@ -97,7 +97,7 @@ h2{margin-top:34px;text-align:center;font-size:22px;font-weight:800;line-height:
 </head>
 <body>
 <header class="top">
-  <div class="wm">olera<span>a</span></div><div class="sep"></div>
+  <div class="wm"><img src="../img/oleraa-logo.png" alt="oleraa"></div><div class="sep"></div>
   <div class="mini">
     <img src="../img/logo-shopee.png" alt="Shopee"><img src="../img/logo-tiktok.png" alt="TikTok Shop"><img src="../img/logo-tokopedia.png" alt="Tokopedia"><img src="../img/logo-lazada.png" alt="Lazada"><img src="../img/logo-blibli.png" alt="Blibli"><img src="../img/logo-traveloka.png" alt="Traveloka"><img src="../img/logo-tiket.png" alt="tiket.com">
   </div>
@@ -117,7 +117,7 @@ h2{margin-top:34px;text-align:center;font-size:22px;font-weight:800;line-height:
       <p class="rw-amount"><small>Rp</small><span id="rwAmount">0</span></p>
       <p class="sub" id="rwTerms"></p>
     </div>
-    <div class="card"><div class="lg">oleraa<span></span></div><div class="chip"></div><div class="cd" id="cardCode">KODE UNDANGAN</div></div>
+    <div class="card"><div class="lg"><img src="../img/oleraa-logo.png" alt="oleraa"></div><div class="chip"></div><div class="cd" id="cardCode">KODE UNDANGAN</div></div>
   </section>
   <div class="codebox" id="codebox" hidden>Kode undangan: <b id="code"></b><button class="copy" id="copyBtn" type="button">Salin</button></div>
   <div class="timer" id="timer" hidden>Sisa waktu klaim <b id="timerVal">48 : 00 : 00</b></div>
@@ -165,7 +165,7 @@ h2{margin-top:34px;text-align:center;font-size:22px;font-weight:800;line-height:
   <div class="grip"></div>
   <!-- Langkah 1: pilih cara masuk -->
   <div id="stepPick">
-    <div class="wm">olera<span>a</span></div>
+    <div class="wm"><img src="../img/oleraa-logo.png" alt="oleraa"></div>
     <h3 id="sheetTitle">Selamat datang di oleraa!</h3>
     <p class="tag">Belanja &amp; pesan hotel, dapat cashback</p>
     <a class="opt" href="#" data-app><svg viewBox="0 0 24 24"><path d="M16.5 3c.4 2 1.7 3.4 3.5 3.6v3.1c-1.3 0-2.5-.4-3.5-1v6.2a5.7 5.7 0 1 1-5.7-5.7v3.2a2.6 2.6 0 1 0 2.6 2.6V3h3.1z" fill="#fff"/></svg><span>Lanjutkan dengan TikTok</span></a>

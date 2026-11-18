@@ -27,6 +27,7 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--orange); outlin
 .site-header .wrap { display: flex; align-items: center; justify-content: space-between; gap: 0 16px; min-height: 64px; flex-wrap: wrap; padding-top: 8px; padding-bottom: 8px; }
 .wordmark { font-weight: 800; font-size: 1.5rem; letter-spacing: -0.02em; color: var(--ink); text-decoration: none; }
 .wordmark span { color: var(--orange); }
+.wordmark img { display: block; height: 34px; width: auto; }
 .site-nav { display: flex; gap: 4px 18px; flex-wrap: wrap; font-size: 0.92rem; }
 .site-nav a { color: var(--ink-2); text-decoration: none; padding: 12px 0; }
 .site-nav a:hover, .site-nav a[aria-current="page"] { color: var(--ink); text-decoration: underline; }
@@ -116,6 +117,7 @@ section h2 { font-size: 1.45rem; margin: 0 0 16px; letter-spacing: -0.01em; }
 
 .foot-brand { font-weight: 800; font-size: 1.1rem; color: var(--ink); margin-right: 12px; }
 .foot-brand span { color: var(--orange); }
+.foot-brand img { display: inline-block; height: 22px; width: auto; vertical-align: middle; }
 
 @media (max-width: 760px) {
   .hero-split { grid-template-columns: 1fr; gap: 28px; }
