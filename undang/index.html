@@ -25,6 +25,7 @@
 <style>
 :root{--navy:#0b1f33;--navy2:#13304d;--orange:#f97316;--ink2:#9fb0bf;--line:rgba(255,255,255,.12)}
 *{box-sizing:border-box;margin:0}
+[hidden]{display:none!important}
 body{background:#0e1b29;color:#fff;font-family:"Plus Jakarta Sans",system-ui,sans-serif;line-height:1.5;padding-bottom:96px}
 .wrap{max-width:480px;margin:0 auto;padding:0 16px}
 .top{display:flex;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid var(--line);max-width:480px;margin:0 auto}
@@ -44,6 +45,11 @@ body{background:#0e1b29;color:#fff;font-family:"Plus Jakarta Sans",system-ui,san
 .card .cd{position:absolute;left:18px;bottom:16px;font-size:12px;letter-spacing:2px;color:#ffe9d6}
 .codebox{margin-top:14px;display:flex;align-items:center;justify-content:center;gap:10px;font-size:14px;color:#c6d2dc}
 .codebox b{font-size:18px;letter-spacing:3px;color:#fff}
+.rw-title{margin-top:14px;font-size:24px;font-weight:600;color:#e7edf2}
+.rw-amount{font-size:52px;font-weight:800;line-height:1.1;letter-spacing:-1px}
+.rw-amount small{font-size:24px;font-weight:800;margin-right:2px}
+.timer{margin-top:16px;text-align:center;font-size:15px;color:#e7edf2}
+.timer b{font-variant-numeric:tabular-nums;letter-spacing:1px;margin-left:4px}
 .copy{border:1px solid var(--line);background:transparent;color:#fff;border-radius:999px;padding:5px 12px;font:inherit;font-size:12px;cursor:pointer}
 .btn{display:block;text-align:center;background:var(--orange);color:#fff;text-decoration:none;font-weight:700;font-size:16px;border-radius:999px;padding:13px 18px;box-shadow:0 8px 20px rgba(249,115,22,.35)}
 .cta1{width:72%;margin:16px auto 0}
@@ -99,12 +105,22 @@ h2{margin-top:34px;text-align:center;font-size:22px;font-weight:800;line-height:
 
 <main class="wrap">
   <section class="hero">
-    <div class="from" id="from"><span class="ph">o</span><span>Undangan dari <b id="inviterName">teman kamu</b></span></div>
-    <h1>Belanja Sekarang,<br>Dapat Cashback</h1>
-    <p class="sub">Daftar oleraa pakai kode undangan di bawah</p>
+    <div class="from" id="from"><span class="ph">o</span><span><span id="fromLabel">Undangan dari</span> <b id="inviterName">teman kamu</b></span></div>
+    <!-- Tanpa hadiah aktif -->
+    <div id="heroPlain">
+      <h1>Belanja Sekarang,<br>Dapat Cashback</h1>
+      <p class="sub">Daftar oleraa pakai kode undangan di bawah</p>
+    </div>
+    <!-- Hadiah aktif: angka dari server (pengaturan hadiah undangan) -->
+    <div id="heroReward" hidden>
+      <p class="rw-title">Kredit Cashback Ekstra</p>
+      <p class="rw-amount"><small>Rp</small><span id="rwAmount">0</span></p>
+      <p class="sub" id="rwTerms"></p>
+    </div>
     <div class="card"><div class="lg">oleraa<span></span></div><div class="chip"></div><div class="cd" id="cardCode">KODE UNDANGAN</div></div>
   </section>
   <div class="codebox" id="codebox" hidden>Kode undangan: <b id="code"></b><button class="copy" id="copyBtn" type="button">Salin</button></div>
+  <div class="timer" id="timer" hidden>Sisa waktu klaim <b id="timerVal">48 : 00 : 00</b></div>
   <a class="btn cta1" href="#" data-join>Klaim hadiah</a>
 
   <h2>Setiap Belanja<br>Dapatkan Cashback!</h2>
@@ -155,6 +171,7 @@ h2{margin-top:34px;text-align:center;font-size:22px;font-weight:800;line-height:
     <a class="opt" href="#" data-app><svg viewBox="0 0 24 24"><path d="M16.5 3c.4 2 1.7 3.4 3.5 3.6v3.1c-1.3 0-2.5-.4-3.5-1v6.2a5.7 5.7 0 1 1-5.7-5.7v3.2a2.6 2.6 0 1 0 2.6 2.6V3h3.1z" fill="#fff"/></svg><span>Lanjutkan dengan TikTok</span></a>
     <a class="opt" href="#" data-app><svg viewBox="0 0 24 24"><path d="M21.6 12.2c0-.7-.1-1.4-.2-2H12v3.8h5.4a4.6 4.6 0 0 1-2 3v2.5h3.2c1.9-1.8 3-4.3 3-7.3z" fill="#4285F4"/><path d="M12 22c2.7 0 5-.9 6.6-2.4l-3.2-2.5c-.9.6-2 1-3.4 1-2.6 0-4.8-1.8-5.6-4.1H3.1v2.6A10 10 0 0 0 12 22z" fill="#34A853"/><path d="M6.4 14c-.2-.6-.3-1.3-.3-2s.1-1.4.3-2V7.4H3.1a10 10 0 0 0 0 9.2L6.4 14z" fill="#FBBC05"/><path d="M12 5.9c1.5 0 2.8.5 3.8 1.5l2.9-2.9A10 10 0 0 0 3.1 7.4L6.4 10c.8-2.3 3-4.1 5.6-4.1z" fill="#EA4335"/></svg><span>Masuk dengan Google</span></a>
     <button class="opt" type="button" id="optWa"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.6 14.1c-.2.7-1.4 1.3-1.9 1.3-.5.1-1.1.1-1.8-.1-.4-.1-1-.3-1.7-.6-3-1.3-4.9-4.3-5.1-4.5-.1-.2-1.2-1.6-1.2-3.1s.8-2.2 1-2.5c.3-.3.6-.4.8-.4h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .5l-.3.5-.4.5c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.5.3.1.2.1.8-.1 1.5z" fill="#25D366"/></svg><span>Daftar dengan WhatsApp</span></button>
+    <p class="tag" id="rewardNote" hidden style="margin-top:12px;font-size:12.5px">Klaim hadiah Kredit Cashback Ekstra: daftar dengan WhatsApp di halaman ini.</p>
     <label class="agree"><input type="checkbox" id="agree"><span>Saya menyetujui <a href="../syarat-ketentuan.html" target="_blank">Ketentuan Layanan</a> &amp; <a href="../kebijakan-privasi.html" target="_blank">Kebijakan Privasi</a> oleraa</span></label>
     <p class="msg" id="pickMsg"></p>
   </div>
@@ -210,6 +227,7 @@ window.addEventListener("DOMContentLoaded", function () {
     .then(function (d) {
       if (!d || !d.name) return;
       document.getElementById("inviterName").textContent = d.name;
+      if (d.reward) showReward(d.reward, code);
       var ph = document.querySelector("#from .ph");
       if (d.avatarUrl && /^(https:\/\/|data:image\/(jpeg|png|webp);base64,)/.test(d.avatarUrl)) {
         var img = document.createElement("img"); img.src = d.avatarUrl; img.alt = ""; ph.replaceWith(img);
@@ -219,6 +237,43 @@ window.addEventListener("DOMContentLoaded", function () {
 });
 </script>
 <script>
+var REWARD_ACTIVE = false;
+// Waktu link undangan pertama kali dibuka di HP ini (per kode). Dipakai hitung mundur & dikirim saat daftar.
+function invitedAtFor(code) {
+  var key = "oleraa_invite_opened_" + code, t = 0;
+  try { t = Number(localStorage.getItem(key)) || 0; } catch (e) {}
+  if (!t) { t = Date.now(); try { localStorage.setItem(key, String(t)); } catch (e) {} }
+  return t;
+}
+function showReward(r, code) {
+  var amount = Number(r.amount) || 0;
+  if (!(amount > 0)) return;
+  document.getElementById("fromLabel").textContent = "Hadiah dari";
+  document.getElementById("heroPlain").hidden = true;
+  document.getElementById("heroReward").hidden = false;
+  document.getElementById("rwAmount").textContent = amount.toLocaleString("id-ID");
+  document.getElementById("rwTerms").textContent = "Tambahan " + r.percent + "% dari setiap cashback, total sampai Rp" + amount.toLocaleString("id-ID") + ", berlaku " + r.days + " hari.";
+  document.getElementById("codebox").hidden = true;
+  document.getElementById("rewardNote").hidden = false;
+  var timer = document.getElementById("timer"), val = document.getElementById("timerVal");
+  var end = invitedAtFor(code) + r.claimHours * 3600 * 1000;
+  timer.hidden = false;
+  function pad(n) { return (n < 10 ? "0" : "") + n; }
+  function tick() {
+    var left = Math.max(0, end - Date.now());
+    if (left <= 0) {
+      REWARD_ACTIVE = false;
+      timer.textContent = "Waktu klaim hadiah sudah habis. Kamu tetap bisa daftar oleraa.";
+      document.getElementById("rewardNote").hidden = true;
+      return;
+    }
+    REWARD_ACTIVE = true;
+    var s = Math.floor(left / 1000);
+    val.textContent = pad(Math.floor(s / 3600)) + " : " + pad(Math.floor(s / 60) % 60) + " : " + pad(s % 60);
+    setTimeout(tick, 1000);
+  }
+  tick();
+}
 function setupSheet(code, playLink) {
   var API = "https://api.oleraaofficial.com/api/web-invite/whatsapp/";
   var sheet = document.getElementById("sheet"), bg = document.getElementById("sheetBg");
@@ -277,10 +332,17 @@ function setupSheet(code, playLink) {
     var otp = document.getElementById("otp").value.replace(/\D/g, "");
     if (otp.length !== 6) { msg.textContent = "Masukkan 6 angka kode dari WhatsApp."; return; }
     b.disabled = true; msg.textContent = "Memeriksa kode...";
-    post("verify", { phone: phone, code: otp }).then(function (x) {
+    var body = { phone: phone, code: otp };
+    if (code) body.invitedAt = new Date(invitedAtFor(code)).toISOString();
+    post("verify", body).then(function (x) {
       b.disabled = false;
       if (!x.ok) { msg.textContent = (x.d && x.d.error) || "Kode salah, coba lagi."; return; }
-      msg.textContent = ""; show("stepDone");
+      msg.textContent = "";
+      if (x.d && x.d.rewarded) {
+        document.getElementById("doneTitle").textContent = "Hadiah kamu sudah aktif!";
+        document.getElementById("doneText").textContent = "Akun oleraa sudah dibuat dan Kredit Cashback Ekstra aktif. Unduh aplikasi oleraa, lalu masuk dengan WhatsApp memakai nomor yang sama.";
+      }
+      show("stepDone");
     }).catch(function () { b.disabled = false; msg.textContent = "Tidak dapat terhubung. Periksa internet kamu."; });
   });
 }
