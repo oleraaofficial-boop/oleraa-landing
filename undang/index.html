@@ -3,6 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Halaman ini sudah gelap: cegah browser HP (mode gelap otomatis) mengubah warna oranye jadi merah tua. -->
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#0e1b29">
 <title>Undangan oleraa: Ambil Cashback Kamu</title>
 <meta name="description" content="Kamu diundang ke oleraa. Belanja di Shopee, TikTok Shop, Lazada, Tokopedia & pesan hotel lewat oleraa, sebagian komisi kembali ke kamu sebagai cashback.">
 <!-- Pratinjau link di WhatsApp / Facebook / Telegram -->
@@ -64,6 +67,26 @@ h2{margin-top:34px;text-align:center;font-size:22px;font-weight:800;line-height:
 .note{margin-top:22px;font-size:12px;color:var(--ink2);text-align:center}
 .bar{position:fixed;left:0;right:0;bottom:0;padding:12px 16px calc(12px + env(safe-area-inset-bottom));background:linear-gradient(transparent,#0e1b29 30%)}
 .bar .btn{max-width:448px;margin:0 auto}
+.sheet-bg{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;z-index:20}
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:21;background:#1a2633;border-radius:22px 22px 0 0;padding:10px 20px calc(22px + env(safe-area-inset-bottom));transform:translateY(105%);transition:transform .25s ease;max-width:520px;margin:0 auto}
+.sheet.open{transform:none}.sheet-bg.open{display:block}
+.grip{width:40px;height:4px;border-radius:2px;background:rgba(255,255,255,.25);margin:0 auto 16px}
+.sheet .wm{font-size:22px}
+.sheet h3{margin-top:8px;font-size:22px;font-weight:800}
+.sheet .tag{color:#c6d2dc;font-size:14px;margin-top:2px}
+.opt{margin-top:12px;display:flex;align-items:center;gap:12px;width:100%;padding:13px 18px;border-radius:999px;border:1px solid rgba(255,255,255,.28);background:transparent;color:#fff;font:inherit;font-size:15px;font-weight:600;text-decoration:none;cursor:pointer}
+.opt span{flex:1;text-align:center;margin-right:24px}
+.opt svg{width:22px;height:22px;flex:none}
+.agree{margin-top:18px;display:flex;gap:10px;align-items:flex-start;font-size:12.5px;color:#c6d2dc}
+.agree input{margin-top:2px;width:18px;height:18px;accent-color:var(--orange);flex:none}
+.agree a{color:#fff;font-weight:700}
+.field{margin-top:14px;display:flex;align-items:center;border:1px solid rgba(255,255,255,.3);border-radius:14px;overflow:hidden}
+.field b{padding:12px 12px;border-right:1px solid rgba(255,255,255,.2)}
+.field input{flex:1;background:transparent;border:0;color:#fff;font:inherit;font-size:16px;padding:12px;outline:none;letter-spacing:.5px}
+.msg{margin-top:10px;font-size:13px;color:#ffb38a;min-height:18px}
+.ok{margin-top:10px;font-size:14px;color:#c6d2dc}
+.link{background:none;border:0;color:#c6d2dc;font:inherit;font-size:13px;text-decoration:underline;margin-top:10px;cursor:pointer}
+.btn[disabled]{opacity:.5;pointer-events:none}
 </style>
 </head>
 <body>
@@ -82,7 +105,7 @@ h2{margin-top:34px;text-align:center;font-size:22px;font-weight:800;line-height:
     <div class="card"><div class="lg">oleraa<span></span></div><div class="chip"></div><div class="cd" id="cardCode">KODE UNDANGAN</div></div>
   </section>
   <div class="codebox" id="codebox" hidden>Kode undangan: <b id="code"></b><button class="copy" id="copyBtn" type="button">Salin</button></div>
-  <a class="btn cta1" href="#" data-download>Daftar Sekarang</a>
+  <a class="btn cta1" href="#" data-join>Klaim hadiah</a>
 
   <h2>Setiap Belanja<br>Dapatkan Cashback!</h2>
   <p class="lead">Belanja seperti biasa lewat link dari oleraa. Partner membayar komisi ke oleraa, dan sebagian kami kembalikan ke kamu sebagai saldo cashback.</p>
@@ -121,15 +144,57 @@ h2{margin-top:34px;text-align:center;font-size:22px;font-weight:800;line-height:
   <p class="note">oleraa &middot; <a href="../index.html" style="color:inherit">oleraaofficial.com</a> &middot; <a href="../syarat-ketentuan.html" style="color:inherit">Syarat &amp; Ketentuan</a></p>
 </main>
 
-<div class="bar"><a class="btn" href="#" data-download>Daftar Sekarang</a></div>
+<div class="sheet-bg" id="sheetBg"></div>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
+  <div class="grip"></div>
+  <!-- Langkah 1: pilih cara masuk -->
+  <div id="stepPick">
+    <div class="wm">olera<span>a</span></div>
+    <h3 id="sheetTitle">Selamat datang di oleraa!</h3>
+    <p class="tag">Belanja &amp; pesan hotel, dapat cashback</p>
+    <a class="opt" href="#" data-app><svg viewBox="0 0 24 24"><path d="M16.5 3c.4 2 1.7 3.4 3.5 3.6v3.1c-1.3 0-2.5-.4-3.5-1v6.2a5.7 5.7 0 1 1-5.7-5.7v3.2a2.6 2.6 0 1 0 2.6 2.6V3h3.1z" fill="#fff"/></svg><span>Lanjutkan dengan TikTok</span></a>
+    <a class="opt" href="#" data-app><svg viewBox="0 0 24 24"><path d="M21.6 12.2c0-.7-.1-1.4-.2-2H12v3.8h5.4a4.6 4.6 0 0 1-2 3v2.5h3.2c1.9-1.8 3-4.3 3-7.3z" fill="#4285F4"/><path d="M12 22c2.7 0 5-.9 6.6-2.4l-3.2-2.5c-.9.6-2 1-3.4 1-2.6 0-4.8-1.8-5.6-4.1H3.1v2.6A10 10 0 0 0 12 22z" fill="#34A853"/><path d="M6.4 14c-.2-.6-.3-1.3-.3-2s.1-1.4.3-2V7.4H3.1a10 10 0 0 0 0 9.2L6.4 14z" fill="#FBBC05"/><path d="M12 5.9c1.5 0 2.8.5 3.8 1.5l2.9-2.9A10 10 0 0 0 3.1 7.4L6.4 10c.8-2.3 3-4.1 5.6-4.1z" fill="#EA4335"/></svg><span>Masuk dengan Google</span></a>
+    <button class="opt" type="button" id="optWa"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.6 14.1c-.2.7-1.4 1.3-1.9 1.3-.5.1-1.1.1-1.8-.1-.4-.1-1-.3-1.7-.6-3-1.3-4.9-4.3-5.1-4.5-.1-.2-1.2-1.6-1.2-3.1s.8-2.2 1-2.5c.3-.3.6-.4.8-.4h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .5l-.3.5-.4.5c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.5.3.1.2.1.8-.1 1.5z" fill="#25D366"/></svg><span>Daftar dengan WhatsApp</span></button>
+    <label class="agree"><input type="checkbox" id="agree"><span>Saya menyetujui <a href="../syarat-ketentuan.html" target="_blank">Ketentuan Layanan</a> &amp; <a href="../kebijakan-privasi.html" target="_blank">Kebijakan Privasi</a> oleraa</span></label>
+    <p class="msg" id="pickMsg"></p>
+  </div>
+  <!-- Langkah 2: nomor WhatsApp -->
+  <div id="stepPhone" hidden>
+    <h3>Daftar dengan WhatsApp</h3>
+    <p class="tag">Kode 6 angka akan dikirim ke WhatsApp kamu.</p>
+    <div class="field"><b>+62</b><input id="phone" type="tel" inputmode="numeric" autocomplete="tel-national" placeholder="8xxxxxxxxxx"></div>
+    <p class="msg" id="phoneMsg"></p>
+    <button class="btn" type="button" id="sendCode" style="width:100%;border:0">Kirim kode</button>
+    <button class="link" type="button" data-back>Kembali</button>
+  </div>
+  <!-- Langkah 3: kode OTP -->
+  <div id="stepCode" hidden>
+    <h3>Masukkan kode</h3>
+    <p class="tag" id="codeInfo">Kode sudah dikirim ke WhatsApp kamu.</p>
+    <div class="field"><input id="otp" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="6 angka" style="text-align:center;letter-spacing:6px"></div>
+    <p class="msg" id="codeMsg"></p>
+    <button class="btn" type="button" id="verifyCode" style="width:100%;border:0">Daftar</button>
+    <button class="link" type="button" data-back>Ganti nomor</button>
+  </div>
+  <!-- Langkah 4: selesai -->
+  <div id="stepDone" hidden>
+    <h3 id="doneTitle">Akun oleraa kamu sudah dibuat!</h3>
+    <p class="ok" id="doneText">Unduh aplikasi oleraa, lalu masuk dengan WhatsApp memakai nomor yang sama.</p>
+    <a class="btn" href="#" data-download style="margin-top:16px">Unduh aplikasi oleraa</a>
+  </div>
+</div>
+
+<div class="bar"><a class="btn" href="#" data-join>Daftar Sekarang</a></div>
 
 <script>
-(function () {
+// Jalan setelah semua <script> dibaca (setupSheet ada di script berikutnya).
+window.addEventListener("DOMContentLoaded", function () {
   var PLAY = "https://play.google.com/store/apps/details?id=id.oleraa.app";
   var params = new URLSearchParams(location.search);
   var code = (params.get("ref") || "").toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 16);
   var link = PLAY + (code ? "&referrer=" + encodeURIComponent("ref=" + code) : "");
   document.querySelectorAll("[data-download]").forEach(function (a) { a.href = link; a.rel = "noopener"; });
+  setupSheet(code, link);
   if (!code) return;
   document.getElementById("code").textContent = code;
   document.getElementById("cardCode").textContent = code.split("").join(" ");
@@ -151,7 +216,74 @@ h2{margin-top:34px;text-align:center;font-size:22px;font-weight:800;line-height:
       } else { ph.textContent = d.name.charAt(0).toUpperCase(); }
     })
     .catch(function () {});
-})();
+});
+</script>
+<script>
+function setupSheet(code, playLink) {
+  var API = "https://api.oleraaofficial.com/api/web-invite/whatsapp/";
+  var sheet = document.getElementById("sheet"), bg = document.getElementById("sheetBg");
+  var steps = ["stepPick", "stepPhone", "stepCode", "stepDone"];
+  var phone = "";
+  function show(id) { steps.forEach(function (s) { document.getElementById(s).hidden = s !== id; }); }
+  function open(e) { if (e) e.preventDefault(); show("stepPick"); sheet.classList.add("open"); bg.classList.add("open"); }
+  function close() { sheet.classList.remove("open"); bg.classList.remove("open"); }
+  function agreed() {
+    if (document.getElementById("agree").checked) { document.getElementById("pickMsg").textContent = ""; return true; }
+    document.getElementById("pickMsg").textContent = "Centang persetujuan Ketentuan Layanan & Kebijakan Privasi dulu ya.";
+    return false;
+  }
+  function post(path, body) {
+    return fetch(API + path, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) })
+      .then(function (r) { return r.json().catch(function () { return {}; }).then(function (d) { return { ok: r.ok, d: d }; }); });
+  }
+  document.querySelectorAll("[data-join]").forEach(function (a) { a.addEventListener("click", open); });
+  bg.addEventListener("click", close);
+  document.querySelectorAll("[data-back]").forEach(function (b) { b.addEventListener("click", function () { show(b.closest("#stepCode") ? "stepPhone" : "stepPick"); }); });
+  // TikTok & Google: login dilakukan di aplikasi.
+  document.querySelectorAll("[data-app]").forEach(function (a) {
+    a.href = playLink;
+    a.addEventListener("click", function (e) { if (!agreed()) e.preventDefault(); });
+  });
+  document.getElementById("optWa").addEventListener("click", function () { if (agreed()) show("stepPhone"); });
+
+  var phoneInput = document.getElementById("phone");
+  phoneInput.addEventListener("input", function () {
+    var d = phoneInput.value.replace(/\D/g, "");
+    if (d.indexOf("62") === 0) d = d.slice(2);
+    if (d.indexOf("0") === 0) d = d.slice(1);
+    phoneInput.value = d.slice(0, 13);
+  });
+  document.getElementById("sendCode").addEventListener("click", function () {
+    var b = this, msg = document.getElementById("phoneMsg");
+    var d = phoneInput.value;
+    if (!/^8\d{7,12}$/.test(d)) { msg.textContent = "Nomor WhatsApp belum benar (contoh: 81234567890)."; return; }
+    phone = "0" + d; b.disabled = true; msg.textContent = "Mengirim kode...";
+    var body = { phone: phone }; if (code) body.referralCode = code;
+    post("request", body).then(function (x) {
+      b.disabled = false;
+      if (!x.ok) { msg.textContent = (x.d && x.d.error) || "Gagal mengirim kode, coba lagi."; return; }
+      msg.textContent = "";
+      document.getElementById("codeInfo").textContent = "Kode sudah dikirim ke WhatsApp +62" + d + ".";
+      if (x.d && x.d.isNewUser === false) {
+        document.getElementById("doneTitle").textContent = "Nomor ini sudah terdaftar di oleraa";
+        document.getElementById("doneText").textContent = "Langsung masuk di aplikasi oleraa dengan WhatsApp nomor ini.";
+        show("stepDone"); return;
+      }
+      show("stepCode"); document.getElementById("otp").focus();
+    }).catch(function () { b.disabled = false; msg.textContent = "Tidak dapat terhubung. Periksa internet kamu."; });
+  });
+  document.getElementById("verifyCode").addEventListener("click", function () {
+    var b = this, msg = document.getElementById("codeMsg");
+    var otp = document.getElementById("otp").value.replace(/\D/g, "");
+    if (otp.length !== 6) { msg.textContent = "Masukkan 6 angka kode dari WhatsApp."; return; }
+    b.disabled = true; msg.textContent = "Memeriksa kode...";
+    post("verify", { phone: phone, code: otp }).then(function (x) {
+      b.disabled = false;
+      if (!x.ok) { msg.textContent = (x.d && x.d.error) || "Kode salah, coba lagi."; return; }
+      msg.textContent = ""; show("stepDone");
+    }).catch(function () { b.disabled = false; msg.textContent = "Tidak dapat terhubung. Periksa internet kamu."; });
+  });
+}
 </script>
 </body>
 </html>
